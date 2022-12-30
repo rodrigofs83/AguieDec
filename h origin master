@@ -1,0 +1,191 @@
+[1mdiff --git a/pom.xml b/pom.xml[m
+[1mindex df83c91..53edc60 100644[m
+[1m--- a/pom.xml[m
+[1m+++ b/pom.xml[m
+[36m@@ -42,19 +42,11 @@[m
+ 			<artifactId>spring-boot-starter-test</artifactId>[m
+ 			<scope>test</scope>[m
+ 		</dependency>[m
+[32m+[m
+ 		<dependency>[m
+[31m-			<groupId>org.hibernate</groupId>[m
+[31m-			<artifactId>hibernate-entitymanager</artifactId>[m
+[31m-			<version>5.4.30.Final</version>[m
+[32m+[m			[32m<groupId>org.springframework.boot</groupId>[m
+[32m+[m			[32m<artifactId>spring-boot-starter-data-jpa</artifactId>[m
+ 		</dependency>[m
+[31m-		<dependency>[m
+[31m-            <groupId>org.springframework.boot</groupId>[m
+[31m-            <artifactId>spring-boot-starter-validation</artifactId>[m
+[31m-        </dependency>[m
+[31m-		<dependency>[m
+[31m-            <groupId>org.springframework.boot</groupId>[m
+[31m-            <artifactId>spring-boot-starter-data-jpa</artifactId>[m
+[31m-        </dependency>[m
+ 	</dependencies>[m
+ [m
+ 	<build>[m
+[1mdiff --git a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Declaracao.java b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Declaracao.java[m
+[1mindex 3ce8716..e00d50a 100644[m
+[1m--- a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Declaracao.java[m
+[1m+++ b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Declaracao.java[m
+[36m@@ -1,33 +1,5 @@[m
+ package br.edu.ifpb.pweb2.aguiamaster.model;[m
+ [m
+[31m-import java.util.Date;[m
+[31m-[m
+[31m-import javax.persistence.Entity;[m
+[31m-import javax.persistence.GeneratedValue;[m
+[31m-import javax.persistence.GenerationType;[m
+[31m-import javax.persistence.Id;[m
+[31m-import javax.persistence.ManyToOne;[m
+[31m-[m
+[31m-import org.springframework.format.annotation.DateTimeFormat;[m
+[31m-[m
+[31m-import lombok.Data;[m
+[31m-[m
+[31m-@Entity[m
+[31m-@Data[m
+ public class Declaracao {[m
+[31m-    @Id[m
+[31m-    @GeneratedValue(strategy = GenerationType.IDENTITY)[m
+[31m-    private Long id;[m
+[31m-[m
+[31m-    @DateTimeFormat(pattern = "yyyy-MM-dd")[m
+[31m-    private Date dataRecebimento;[m
+[31m-[m
+[31m-    private String observacao;[m
+[31m-[m
+[31m-    @ManyToOne //relacionamento[m
+[31m-    private Estudante estudante;[m
+[31m-[m
+[31m-    @ManyToOne//relacionamento[m
+[31m-    private PeriodoLetivo periodoLetivo;[m
+[31m-    [m
+[32m+[m[32m    private Number numero; //só pra testar[m
+ }[m
+[1mdiff --git a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Estudante.java b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Estudante.java[m
+[1mindex ae8c2c1..93b5de8 100644[m
+[1m--- a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Estudante.java[m
+[1m+++ b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Estudante.java[m
+[36m@@ -1,34 +1,5 @@[m
+ package br.edu.ifpb.pweb2.aguiamaster.model;[m
+ [m
+[31m-import java.util.List;[m
+[31m-[m
+[31m-import javax.persistence.Entity;[m
+[31m-import javax.persistence.GeneratedValue;[m
+[31m-import javax.persistence.GenerationType;[m
+[31m-import javax.persistence.Id;[m
+[31m-import javax.persistence.OneToMany;[m
+[31m-import javax.validation.constraints.NotBlank;[m
+[31m-[m
+[31m-import lombok.Data;[m
+[31m-[m
+[31m-@Entity[m
+[31m-@Data //lombok[m
+ public class Estudante {[m
+[31m-    @Id[m
+[31m-    @GeneratedValue(strategy = GenerationType.IDENTITY)[m
+[31m-    private Long id;[m
+[31m-[m
+[31m-    @NotBlank(message="Campo obrigatório!")[m
+[31m-    private String nome;[m
+[31m-[m
+[31m-    @NotBlank(message="Campo obrigatório!")[m
+[31m-    private String matricula;[m
+[31m-[m
+[31m-    private String senha;[m
+[31m-[m
+[31m-    private boolean admin = false;[m
+[31m-    [m
+[31m-    @OneToMany //relacionamento[m
+[31m-    private List<Declaracao> declaracoes;[m
+     [m
+ }[m
+[1mdiff --git a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Instituicao.java b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Instituicao.java[m
+[1mindex fe2b9ba..efb9f7d 100644[m
+[1m--- a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Instituicao.java[m
+[1m+++ b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/Instituicao.java[m
+[36m@@ -1,36 +1,5 @@[m
+ package br.edu.ifpb.pweb2.aguiamaster.model;[m
+ [m
+[31m-import java.util.List;[m
+[31m-[m
+[31m-import javax.persistence.Entity;[m
+[31m-import javax.persistence.GeneratedValue;[m
+[31m-import javax.persistence.GenerationType;[m
+[31m-import javax.persistence.Id;[m
+[31m-import javax.persistence.OneToMany;[m
+[31m-import javax.validation.constraints.NotBlank;[m
+[31m-[m
+[31m-import lombok.Data;[m
+[31m-[m
+[31m-@Entity[m
+[31m-@Data[m
+ public class Instituicao {[m
+[31m-    @Id[m
+[31m-    @GeneratedValue(strategy = GenerationType.IDENTITY)[m
+[31m-    private Long id;[m
+[31m-[m
+[31m-    @NotBlank[m
+[31m-    private String nome;[m
+[31m-[m
+[31m-    @NotBlank[m
+[31m-    private String sigla;[m
+[31m-[m
+[31m-    @NotBlank[m
+[31m-    private String fone;[m
+[31m-[m
+[31m-    @OneToMany //relacionamento[m
+[31m-    private List<Estudante> estudantes;[m
+[31m-[m
+[31m-    @OneToMany //relacionamento[m
+[31m-    private List<PeriodoLetivo> periodos;[m
+     [m
+ }[m
+[1mdiff --git a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/PeriodoLetivo.java b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/PeriodoLetivo.java[m
+[1mindex 1814001..a380d37 100644[m
+[1m--- a/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/PeriodoLetivo.java[m
+[1m+++ b/src/main/java/br/edu/ifpb/pweb2/aguiamaster/model/PeriodoLetivo.java[m
+[36m@@ -1,40 +1,5 @@[m
+ package br.edu.ifpb.pweb2.aguiamaster.model;[m
+ [m
+[31m-import java.util.Date;[m
+[31m-import java.util.List;[m
+[31m-[m
+[31m-import javax.persistence.Entity;[m
+[31m-import javax.persistence.GeneratedValue;[m
+[31m-import javax.persistence.GenerationType;[m
+[31m-import javax.persistence.Id;[m
+[31m-import javax.persistence.ManyToOne;[m
+[31m-import javax.persistence.OneToMany;[m
+[31m-import javax.validation.constraints.NotBlank;[m
+[31m-[m
+[31m-import lombok.Data;[m
+[31m-[m
+[31m-@Entity[m
+[31m-@Data[m
+ public class PeriodoLetivo {[m
+[31m-    @Id[m
+[31m-    @GeneratedValue(strategy = GenerationType.IDENTITY)[m
+[31m-    private Long id;[m
+[31m-    [m
+[31m-    @NotBlank[m
+[31m-    private int ano ;[m
+[31m-[m
+[31m-    @NotBlank[m
+[31m-    private  int periodo;[m
+[31m-[m
+[31m-    @NotBlank[m
+[31m-    private Date inicio;[m
+[31m-[m
+[31m-    private  Date fim;[m
+[31m-[m
+[31m-    @OneToMany //relacionamento[m
+[31m-    private List<Declaracao> declaracoes;[m
+[31m-[m
+[31m-    @ManyToOne //relacionamento[m
+[31m-    private Instituicao instituicao;[m
+     [m
+ }[m

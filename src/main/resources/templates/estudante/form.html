@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Estudantes </title>
+</head>
+<body>
+    <h1>Cadastro de Estudates</h1>
+
+    <form th:action="@{/estudante}" method="POST" th:object="${estudante}">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" th:field="*{nome}"class="form-control" /><br /><br />
+        <label for="nome" class="form-label">Matricula</label>
+        <input type="text" th:field="*{matricula}"class="form-control" /><br /><br />
+        <label for="senha" class="form-label">Senha</label>
+        <input type="password" th:field="*{senha}"class="form-control" /><br /><br />
+        
+        <label for="instituicao">Instituição</label>
+            <select id="instituicao.id" th:field="*{instituicao.id}" class="form-select">
+                <option th:each="ins : ${instituicaoItens}"
+                 th:value="${ins.id}" th:text="${ins.nome}" th:selected="${ins.id==instituicao}" />
+            </select>
+        
+    
+        <input type="checkbox" th:field="*{admin}" class="form-check-input" />Admin<br /><br />
+        <input type="submit" value="Salvar" />
+    </form>
+</div>
+</body>
+</html>

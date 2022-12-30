@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lista instituicao</title>
+</head>
+<body>
+    <div class="container">
+    <h1>lista de instituicao</h1>
+    <table>
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">sigla</th>
+            <th scope="col">fone</th>
+
+        </thead>
+        <tbody>
+            <tr scope="row" th:each="instituicao : ${instituicoes}">
+                <td th:text="${instituicao.id}"></td>
+                <td th:text="${instituicao.nome}"></td>
+                <td th:text="${instituicao.sigla}"></td>
+                <td th:text="${instituicao.fone}"></td>
+                <td ></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
