@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomerController {
     @RequestMapping
     public String getHomer(){
-        return "index";
+        return "pag1";
     }
-    
+
 }
