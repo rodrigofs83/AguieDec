@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html lang="en"
-xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lista estudante</title>
-</head>
-<body>
-    <div class="container">
-    <h1>lista de estudante</h1>
-    <table>
-        <thead>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Matricula</th>
-            <th scope="col">Instituição</th>
+<html lang="pt_BR" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 
-        </thead>
-        <tbody>
-            <tr scope="row" th:each="estudante : ${estudantes}">
-                <td th:text="${estudante.id}"></td>
-                <td th:text="${estudante.nome}"></td>
-                <td th:text="${estudante.matricula}"></td>
-                <td th:text="${estudante.instituicao.nome}"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+<head th:replace="~{/fragments/base :: head}"></head>
+<body class="text-white bg-dark">
+    <header th:replace="~{/fragments/base :: header}"></header>
+  
+    <div class="container">
+        <h1 class="text-center p-4">lista de estudante</h1>
+        <table class="table table-bordered table-hover text-white ">
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Instituição</th>
+                <th scope="col">Açao</th>
+
+            </thead>
+            <tbody>
+                <tr scope="row" th:each="estudante : ${estudantes}">
+                    <td th:text="${estudante.id}"></td>
+                    <td th:text="${estudante.nome}"></td>
+                    <td th:text="${estudante.matricula}"></td>
+                    <td th:text="${estudante.instituicao.nome}"></td>
+                    <td class="">
+                        <a class="btn btn-primary btn-custom" th:href="@{edita/{id}(id=${estudante.id})}">
+                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
+                        <a class="btn btn-danger btn-custom"th:href="@{excluir/{id}(id=${estudante.id})}">
+                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span>Excluir</a>
+                        
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>

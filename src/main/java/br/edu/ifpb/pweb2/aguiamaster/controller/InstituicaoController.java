@@ -23,7 +23,7 @@ public class InstituicaoController {
         @Autowired
         InstituicaoRepository instituicaoRepository;
         @RequestMapping("/ins-form") 
-        public ModelAndView getCasdastroEstudante(Instituicao instituicao , ModelAndView mav){
+        public ModelAndView getCasdastroInstituicao(Instituicao instituicao , ModelAndView mav){
             mav.addObject("instituicao",instituicao);
             mav.setViewName("instituicao/ins-form");
             return  mav;

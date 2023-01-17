@@ -47,7 +47,6 @@ public class EstudanteController {
                     return mav;
                 }
                 mav.setViewName("estudante/form");
-               // estudante.setInstituicao(estudante.getInstituicao());
                 estudanteService.saveEstudate(estudante);
                 mav.setViewName("redirect:estudante");
                 attrs.addFlashAttribute("mensagem", "Estudante cadastrado com sucesso!");
@@ -63,16 +62,30 @@ public class EstudanteController {
 
     @RequestMapping("/{id}")
     public ModelAndView getEstudanteById(@PathVariable(value = "id") Integer id, ModelAndView mav) {
-       // Correntista correntista = null;
-        //Optional<Correntista> opCorrentista = correntistaRepository.findById(id);
-       /*   if (opCorrentista.isPresent()) {
-            correntista = opCorrentista.get();
-            mav.addObject("correntista", correntista);
-            mav.setViewName("correntistas/form");
+     Estudante estudante = null;
+     /*
+     ofNullable​ - Se um valor estiver presente, 
+     retorna um Optional com o valor , caso contrário,
+      retorna um Optional vazio. Este é um dos métodos mais indicados 
+      para criar um Optional.
+       */
+        Optional<Estudante> opestudante = Optional.ofNullable(estudanteService.getEstudanteById(id));
+         if (opestudante.isPresent()) {
+            estudante = opestudante.get();
+            mav.addObject("estudante", estudante);
+            mav.setViewName("estudantes/form");
         } else {
-            mav.addObject("mensagem", "Correntista com id=" + id + " não encontrado!");
-            mav.setViewName("contas/list");
-        }*/
+            mav.addObject("mensagem", "estudante com id=" + id + " não encontrado!");
+            mav.setViewName("estudante/list");
+        }
+        return mav;
+    }
+    @RequestMapping("/{id}/delete")
+    public ModelAndView deleteById(@PathVariable("id") Integer id, ModelAndView mav, RedirectAttributes attr) {
+        
+        estudanteService.deleteEstudanteById(id);
+        attr.addFlashAttribute("mensagem", "Estudante removido com sucesso!");
+        mav.setViewName("redirect:/list");
         return mav;
     }
 }  
