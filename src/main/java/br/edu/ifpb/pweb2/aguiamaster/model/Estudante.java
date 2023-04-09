@@ -29,7 +29,7 @@ public class Estudante implements Serializable {
     @Id
     @Column(name="estudante_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank(message="Campo obrigatório!")
     private String nome;

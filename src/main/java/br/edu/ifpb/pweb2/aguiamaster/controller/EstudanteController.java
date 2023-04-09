@@ -23,14 +23,18 @@ import br.edu.ifpb.pweb2.aguiamaster.service.EstudanteService;
 @Controller
 @RequestMapping("/estudante")
 public class EstudanteController {
+
     @Autowired
     EstudanteService estudanteService;
+
     @Autowired
     InstituicaoRepository instituicaoRepository;
+
     @RequestMapping("/form") 
     public ModelAndView getCasdastroEstudante(Estudante estudante , ModelAndView mav){
         mav.addObject("estudante",estudante);
         mav.setViewName("estudante/form");
+        mav.addObject("titulo","Cadastra");
         return  mav;
     }
 
@@ -46,16 +50,26 @@ public class EstudanteController {
                     mav.setViewName("estudante/form");
                     return mav;
                 }
-                mav.setViewName("estudante/form");
+                if (estudante.getId() == null) {
+                    attrs.addFlashAttribute("mensagem", "Estudante cadastrado com sucesso!");
+                    // mav.addObject("titulo","Cadastra");
+                    
+                   
+                } else {
+
+                    attrs.addFlashAttribute("mensagem", "Estudante editado com sucesso!");
+
+                }
                 estudanteService.saveEstudate(estudante);
                 mav.setViewName("redirect:estudante");
-                attrs.addFlashAttribute("mensagem", "Estudante cadastrado com sucesso!");
                 return mav;
+                
     }
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView listAll(ModelAndView mav){
-        mav.addObject("estudantes", estudanteService.getEstudantes());
         mav.setViewName("estudante/list");
+        mav.addObject("estudantes",estudanteService.getEstudantes());
         return mav;
 
     }
@@ -76,16 +90,30 @@ public class EstudanteController {
             mav.setViewName("estudantes/form");
         } else {
             mav.addObject("mensagem", "estudante com id=" + id + " não encontrado!");
-            mav.setViewName("estudante/list");
+            mav.setViewName("estudante");
         }
         return mav;
     }
-    @RequestMapping("/{id}/delete")
+    
+    @RequestMapping("/excluir/{id}")
     public ModelAndView deleteById(@PathVariable("id") Integer id, ModelAndView mav, RedirectAttributes attr) {
         
         estudanteService.deleteEstudanteById(id);
         attr.addFlashAttribute("mensagem", "Estudante removido com sucesso!");
-        mav.setViewName("redirect:/list");
+        mav.setViewName("redirect:/estudante");
         return mav;
     }
+
+    @RequestMapping("/edita/{id}")
+    public ModelAndView edita(@PathVariable("id") Integer id, ModelAndView mav, RedirectAttributes attr) {
+        //estudanteService.editaEstudanteById(id);
+        Estudante e = estudanteService.getEstudanteById(id);
+        mav.addObject("estudante", e);
+        mav.addObject("titulo","Edita");
+        //attr.addFlashAttribute("mensagem", "Estudante editado com sucesso!");
+        mav.setViewName("estudante/form");
+        return mav;
+    }
+
+
 }  

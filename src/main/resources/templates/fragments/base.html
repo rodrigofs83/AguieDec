@@ -1,3 +1,4 @@
+
 <head fragment="head">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +24,11 @@
                 <div class="row">
                     <div class="col-md">
                         <h3 class="float-md-start mb-0">
-                            <img src="imagens/aguia.png" id="img-log" alt="img-log">AguiaDec
+                            <a class="navbar-band" th:href="@{/}">
+                            <!-- <img th:src="@{/imagens/aguia.png}" id="img-log" alt="img-log"> -->
+                            <img th:src="@{/imagens/aguia.png}" id="img-log" alt="img-log">
+                        </a>ÁguiaDec
+                        
                         </h3>
                     </div>
                     <div class="col-md-auto">
@@ -33,8 +38,8 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class=" navbar-nav collapse navbar-collapse " id="navBuguer">
-                            <a class="nav-link " aria-current="page" href="@{home}">Home</a>
-                            <a class="nav-link" href="">Cadastro</a>
+                            <a class="nav-link " aria-current="page" th:href="@{/}">Home</a>
+                            <a class="nav-link" th:href="@{/estudante/form}">Cadastro</a>
                             <a class="nav-link" href="#">Login</a>
                         </div>
 
@@ -47,4 +52,4 @@
         <footer fragment="footer" class="mt-auto text-white-50">
             <p>Redes <a href="https://github.com/rodrigofs83/AguieDec" class="text-white">github</a>, by <a href=""
                     class="text-white">Link</a>.</p>
-        </footer>
+        </footer> 

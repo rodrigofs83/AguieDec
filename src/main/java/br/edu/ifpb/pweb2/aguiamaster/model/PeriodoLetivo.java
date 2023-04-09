@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +38,8 @@ public class PeriodoLetivo  implements Serializable{
     private int ano ;
 
     @NotBlank
-    private  int periodo;
+    @Enumerated(EnumType.STRING)
+    private Periodo periodo;
 
     @NotBlank
     private Date inicio;

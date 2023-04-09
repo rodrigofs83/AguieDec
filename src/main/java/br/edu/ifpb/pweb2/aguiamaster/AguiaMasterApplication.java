@@ -10,4 +10,4 @@ public class AguiaMasterApplication {
 		SpringApplication.run(AguiaMasterApplication.class, args);
 	}
 
-}
+}                                                                                                                                                                                                                                                      

@@ -26,7 +26,7 @@ public class Instituicao implements Serializable{
     @Id
     @Column(name="instituicao_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank
     private String nome;

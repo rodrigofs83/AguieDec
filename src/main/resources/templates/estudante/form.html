@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt_BR" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 
-</html>
 
-<head th:replace="~{/fragments/base :: head}">
 
-    <head>
+<head th:replace="~{/fragments/base :: head}"></head>
 
     <body class="text-white bg-dark">
         
-            <header th:replace="~{/fragments/base :: header}"></header>
+        <header th:replace="~{/fragments/base :: header}"></header>
             <div class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
             <main class="main">
 
-                <h1 class="text-center p-4">Cadastro de Estudates</h1>
+                <h1 class="text-center p-4" th:text="${titulo}"></h1>
 
                 <form class="form-est" th:action="@{/estudante}" method="POST" th:object="${estudante}">
-
+                    <input type="hidden" th:field="*{id}" />
                     <div class="form-group ">
                         <label for="nome" class="form-label">Nome</label>
                         <div class="col-md-9">
@@ -33,7 +31,7 @@
                             <label for="instituicao">Instituição</label>
                             <select id="instituicao.id" th:field="*{instituicao.id}" class="form-select">
                                 <option th:each="ins : ${instituicaoItens}" th:value="${ins.id}" th:text="${ins.nome}"
-                                    th:selected="${ins.id==instituicao}" />
+                                    th:selected="${ins.id==instituicao}"/>
                             </select>
                         </div>
                     </div>
@@ -44,9 +42,9 @@
                             <input type="password" th:field="*{senha}" class="form-control" /><br /><br />
                         </div>
                     </div>
-                    <input type="checkbox" th:field="*{admin}" class="form-check-input" />Admin<br /><br />
+                   
                     <div class="text-center">
-                        <input type="submit" value="Salvar" />
+                        <input type="submit" class="btn btn-success" value="Salvar" />
                     </div>
                 </form>
                

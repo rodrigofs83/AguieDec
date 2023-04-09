@@ -12,29 +12,33 @@
             <thead>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Matricula</th>
+                <th scope="col">Matrícula</th>
                 <th scope="col">Instituição</th>
-                <th scope="col">Açao</th>
+                <th scope="col">Ação</th>
 
             </thead>
+            
             <tbody>
                 <tr scope="row" th:each="estudante : ${estudantes}">
                     <td th:text="${estudante.id}"></td>
                     <td th:text="${estudante.nome}"></td>
                     <td th:text="${estudante.matricula}"></td>
-                    <td th:text="${estudante.instituicao.nome}"></td>
+                    <td th:text="${estudante.instituicao.nome}" th:if="${estudante.instituicao != null}"></td>
+                    <td th:if="${estudante.instituicao == null}">Sem institução cadastrada</td>
                     <td class="">
-                        <a class="btn btn-primary btn-custom" th:href="@{edita/{id}(id=${estudante.id})}">
+                        <a class="btn btn-primary btn-custom" th:href="@{/estudante/edita/{id}(id=${estudante.id})}">
                             <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
-                        <a class="btn btn-danger btn-custom"th:href="@{excluir/{id}(id=${estudante.id})}">
-                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span>Excluir</a>
-                        
+
+                            <a class="btn btn-danger btn-custom" th:href="@{/estudante/excluir/{id}(id=${estudante.id})}">
+                                <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> excluir</a>
+                                
                     </td>
 
 
                 </tr>
             </tbody>
         </table>
+        <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
     </div>
 </body>
 
