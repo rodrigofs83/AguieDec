@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/base :: head}"></head>
+<body class="text-white bg-dark">
+    <header th:replace="~{/fragments/base :: header}"></header>
+    <div class="container">
+    <h1  class="text-center p-4">Periodos</h1>
+    <table  class="table table-bordered table-hover text-white ">
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">periodo</th>
+            <th scope="col">inicio</th>
+            <th scope="col">fim</th>
+            <th scope="col">Ação</th>
+
+        </thead>
+        <tbody>
+            <tr scope="row" th:each="periodo : ${periodos}">
+                <td th:text="${periodo.id}"></td>
+                <td th:text="${periodo.periodo}"></td>
+                <td th:text="${periodo.inicio}"></td>
+                <td th:text="${periodo.fim}"></td>
+                <!-- <td class="">
+                    <a class="btn btn-primary btn-custom" th:href="@{/instituicao/edita/{id}(id=${instituicao.id})}">
+                        <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
+
+                        <a class="btn btn-danger btn-custom" th:href="@{/instituicao/excluir/{id}(id=${instituicao.id})}">
+                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> excluir</a>
+                            
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+    <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
+</div>
+</body>
+</html>

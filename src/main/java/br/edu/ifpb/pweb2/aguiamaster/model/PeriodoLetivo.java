@@ -16,7 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo;
 import lombok.AllArgsConstructor;
@@ -34,16 +37,19 @@ public class PeriodoLetivo  implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotBlank
+    @NotNull
     private int ano ;
 
-    @NotBlank
+    
     @Enumerated(EnumType.STRING)
     private Periodo periodo;
 
-    @NotBlank
+   
+    @DateTimeFormat(iso=ISO.DATE)
     private Date inicio;
-
+    
+   
+    @DateTimeFormat(iso=ISO.DATE)
     private  Date fim;
 
     @OneToMany(mappedBy = "periodoLetivo",

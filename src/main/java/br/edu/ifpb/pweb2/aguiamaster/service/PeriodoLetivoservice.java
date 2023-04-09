@@ -21,7 +21,7 @@ public class PeriodoLetivoservice {
 
     }
 
-    public List<PeriodoLetivo> getperiodoLetivos() {
+    public List<PeriodoLetivo> getPeriodoLetivos() {
         return this.periodoLetivoRepository.findAll();
     } 
 

@@ -54,6 +54,13 @@ public class PeriodoLetivoController {
                 attrs.addFlashAttribute("mensagem", "periodo cadastrado com sucesso!");
                 return mav;
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView listAll(ModelAndView mav){
+        mav.setViewName("periodo/list");
+        mav.addObject("periodo",periodoLetivoService.getPeriodoLetivos());
+        return mav;
+    }
     
 
     
