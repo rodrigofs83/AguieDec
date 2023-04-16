@@ -19,6 +19,7 @@ import br.edu.ifpb.pweb2.aguiamaster.model.Estudante;
 import br.edu.ifpb.pweb2.aguiamaster.model.Instituicao;
 import br.edu.ifpb.pweb2.aguiamaster.repository.InstituicaoRepository;
 import br.edu.ifpb.pweb2.aguiamaster.service.EstudanteService;
+import br.edu.ifpb.pweb2.aguiamaster.service.InstituicaoService;
 
 @Controller
 @RequestMapping("/estudante")
@@ -28,63 +29,62 @@ public class EstudanteController {
     EstudanteService estudanteService;
 
     @Autowired
-    InstituicaoRepository instituicaoRepository;
+    InstituicaoService instituicaoService;
 
-    @RequestMapping("/form") 
-    public ModelAndView getCasdastroEstudante(Estudante estudante , ModelAndView mav){
-        mav.addObject("estudante",estudante);
+    @RequestMapping("/form")
+    public ModelAndView getCasdastroEstudante(Estudante estudante, ModelAndView mav) {
+        mav.addObject("estudante", estudante);
         mav.setViewName("estudante/form");
-        mav.addObject("titulo","Cadastra");
-        return  mav;
+        mav.addObject("titulo", "Cadastra");
+        return mav;
     }
 
     @ModelAttribute("instituicaoItens")
     public List<Instituicao> getInstituicaos() {
-        return instituicaoRepository.findAll();
+        return instituicaoService.getInstituicao();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView save(@Valid Estudante estudante,
-            ModelAndView mav,BindingResult validation,RedirectAttributes attrs){
-                if(validation.hasErrors()){
-                    mav.setViewName("estudante/form");
-                    return mav;
-                }
-                if (estudante.getId() == null) {
-                    attrs.addFlashAttribute("mensagem", "Estudante cadastrado com sucesso!");
-                    // mav.addObject("titulo","Cadastra");
-                    
-                   
-                } else {
+            ModelAndView mav, BindingResult validation, RedirectAttributes attrs) {
+        if (validation.hasErrors()) {
+            mav.setViewName("estudante/form");
+            return mav;
+        }
+        if (estudante.getId() == null) {
+            attrs.addFlashAttribute("mensagem", "Estudante cadastrado com sucesso!");
+            // mav.addObject("titulo","Cadastra");
 
-                    attrs.addFlashAttribute("mensagem", "Estudante editado com sucesso!");
+        } else {
 
-                }
-                estudanteService.saveEstudate(estudante);
-                mav.setViewName("redirect:estudante");
-                return mav;
-                
+            attrs.addFlashAttribute("mensagem", "Estudante editado com sucesso!");
+
+        }
+        estudanteService.saveEstudate(estudante);
+        mav.setViewName("redirect:estudante");
+        return mav;
+
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView listAll(ModelAndView mav){
+    public ModelAndView listAll(ModelAndView mav) {
         mav.setViewName("estudante/list");
-        mav.addObject("estudantes",estudanteService.getEstudantes());
+        mav.addObject("estudantes", estudanteService.getEstudantes());
         return mav;
 
     }
 
     @RequestMapping("/{id}")
     public ModelAndView getEstudanteById(@PathVariable(value = "id") Integer id, ModelAndView mav) {
-     Estudante estudante = null;
-     /*
-     ofNullable​ - Se um valor estiver presente, 
-     retorna um Optional com o valor , caso contrário,
-      retorna um Optional vazio. Este é um dos métodos mais indicados 
-      para criar um Optional.
-       */
+        Estudante estudante = null;
+        /*
+         * ofNullable​ - Se um valor estiver presente,
+         * retorna um Optional com o valor , caso contrário,
+         * retorna um Optional vazio. Este é um dos métodos mais indicados
+         * para criar um Optional.
+         */
         Optional<Estudante> opestudante = Optional.ofNullable(estudanteService.getEstudanteById(id));
-         if (opestudante.isPresent()) {
+        if (opestudante.isPresent()) {
             estudante = opestudante.get();
             mav.addObject("estudante", estudante);
             mav.setViewName("estudantes/form");
@@ -94,10 +94,10 @@ public class EstudanteController {
         }
         return mav;
     }
-    
+
     @RequestMapping("/excluir/{id}")
     public ModelAndView deleteById(@PathVariable("id") Integer id, ModelAndView mav, RedirectAttributes attr) {
-        
+
         estudanteService.deleteEstudanteById(id);
         attr.addFlashAttribute("mensagem", "Estudante removido com sucesso!");
         mav.setViewName("redirect:/estudante");
@@ -106,14 +106,13 @@ public class EstudanteController {
 
     @RequestMapping("/edita/{id}")
     public ModelAndView edita(@PathVariable("id") Integer id, ModelAndView mav, RedirectAttributes attr) {
-        //estudanteService.editaEstudanteById(id);
+        // estudanteService.editaEstudanteById(id);
         Estudante e = estudanteService.getEstudanteById(id);
         mav.addObject("estudante", e);
-        mav.addObject("titulo","Edita");
-        //attr.addFlashAttribute("mensagem", "Estudante editado com sucesso!");
+        mav.addObject("titulo", "Editando");
+        // attr.addFlashAttribute("mensagem", "Estudante editado com sucesso!");
         mav.setViewName("estudante/form");
         return mav;
     }
 
-
-}  
+}

@@ -10,26 +10,35 @@
     <div class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
         <form th:action="@{/periodo}" method="POST" th:object="${periodo}">
             <input type="hidden" th:field="*{id}" />
-            
+            <div class="d-flex flex-row bd-highlight ">
+                
+                    <label for="instituicao" class="form-label">Instituição</label>
+                    <select id="instituicao.id" th:field="*{instituicao.id}" class="form-select">
+                        <option th:each="ins : ${instituicaoItens}" th:value="${ins.id}" th:text="${ins.nome}"
+                            th:selected="${ins.id==instituicao}" />
+                    </select>
+          
+            </div>
+
             <div class="p-2 bd-highlight">
                 <label for="periodo" class="form-label">periodo</label>
-                <select th:field="*{periodo}" >
-                    <option th:each="p : ${T( br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo).values()}" 
-                        th:value="${p}" th:text="${p}"></option>
+                <select th:field="*{periodo}">
+                    <option th:each="p : ${T( br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo).values()}" th:value="${p}"
+                        th:text="${p}"></option>
                 </select>
             </div>
-        
-           
+
+
             <label for="inicio" class="form-label">inicio</label>
-            <input type="date" th:field="*{inicio}" class="form-control" /><br /><br />
+            <input type="date" th:field="*{inicio}" class="form-control" pattern="dd/MM/yyyy" /><br /><br />
             <label for="fim" class="form-label">fim</label>
-            <input type="date" th:field="*{fim}" class="form-control" /><br /><br />
+            <input type="date" th:field="*{fim}" class="form-control" pattern="dd/MM/yyyy" /><br /><br />
             <div class="text-center">
                 <input type="submit" class="btn btn-success" value="Salvar" />
             </div>
 
         </form>
-       
+
     </div>
     <div>
         <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>

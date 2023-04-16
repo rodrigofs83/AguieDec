@@ -32,10 +32,9 @@ public class PeriodoLetivoservice {
 
 	
 
-	public void deleteperiodoLetivoById(Integer periodoLetivo_id) {
-
-        
+	public void deletePeriodoLetivoById(Integer periodoLetivo_id) {
 		this.periodoLetivoRepository.deleteById(periodoLetivo_id);
+
 	}
 
     public void editaperiodoLetivoById(Integer id) {

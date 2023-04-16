@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomerController {
 
     @GetMapping("/")
-    public ModelAndView getHomer(ModelAndView mav){
+    public ModelAndView getHomer(ModelAndView mav) {
         mav.setViewName("home/home");
         return mav;
     }

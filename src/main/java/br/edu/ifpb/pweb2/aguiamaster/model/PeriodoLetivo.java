@@ -35,7 +35,7 @@ public class PeriodoLetivo  implements Serializable{
     @Id
     @Column(name="periodo_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     
     @NotNull
     private int ano ;
@@ -45,11 +45,11 @@ public class PeriodoLetivo  implements Serializable{
     private Periodo periodo;
 
    
-    @DateTimeFormat(iso=ISO.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date inicio;
     
    
-    @DateTimeFormat(iso=ISO.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private  Date fim;
 
     @OneToMany(mappedBy = "periodoLetivo",

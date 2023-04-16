@@ -9,6 +9,7 @@ xmlns:th="http://www.thymeleaf.org">
     <table  class="table table-bordered table-hover text-white ">
         <thead>
             <th scope="col">ID</th>
+            <th scope="col">Instituição</th>
             <th scope="col">periodo</th>
             <th scope="col">inicio</th>
             <th scope="col">fim</th>
@@ -18,21 +19,24 @@ xmlns:th="http://www.thymeleaf.org">
         <tbody>
             <tr scope="row" th:each="periodo : ${periodos}">
                 <td th:text="${periodo.id}"></td>
+                <td th:text="${periodo.instituicao.nome}"th:if="${periodo.instituicao != null}"></td>
+                <td th:if="${periodo.instituicao==null}">sem instituição</td>
                 <td th:text="${periodo.periodo}"></td>
-                <td th:text="${periodo.inicio}"></td>
-                <td th:text="${periodo.fim}"></td>
-                <!-- <td class="">
-                    <a class="btn btn-primary btn-custom" th:href="@{/instituicao/edita/{id}(id=${instituicao.id})}">
+                <td th:text="${#dates.format(periodo.inicio,'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(periodo.fim,'dd/MM/yyyy')}"></td>
+                <td class="">
+                    <a class="btn btn-primary btn-custom" th:href="@{/periodo/edita/{id}(id=${periodo.id})}">
                         <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
 
-                        <a class="btn btn-danger btn-custom" th:href="@{/instituicao/excluir/{id}(id=${instituicao.id})}">
+                        <a class="btn btn-danger btn-custom" th:href="@{/periodo/excluir/{id}(id=${periodo.id})}">
                             <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> excluir</a>
                             
-                </td> -->
+                </td>
             </tr>
         </tbody>
     </table>
-    <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
+   
 </div>
+<footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
 </body>
 </html>
