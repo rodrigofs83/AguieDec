@@ -11,7 +11,7 @@ import br.edu.ifpb.pweb2.aguiamaster.repository.PeriodoLetivoRepository;
 @Service
 public class PeriodoLetivoservice {
     @Autowired
-    private  PeriodoLetivoRepository periodoLetivoRepository;
+    PeriodoLetivoRepository periodoLetivoRepository;
 
     public PeriodoLetivo savePeriodo(PeriodoLetivo novoPeriodoLetivo){
         

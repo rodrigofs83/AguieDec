@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.aguiamaster.model.Estudante;
 import br.edu.ifpb.pweb2.aguiamaster.model.Instituicao;
-import br.edu.ifpb.pweb2.aguiamaster.repository.InstituicaoRepository;
 import br.edu.ifpb.pweb2.aguiamaster.service.EstudanteService;
 import br.edu.ifpb.pweb2.aguiamaster.service.InstituicaoService;
 

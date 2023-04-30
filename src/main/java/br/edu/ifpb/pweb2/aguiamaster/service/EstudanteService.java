@@ -11,7 +11,7 @@ import br.edu.ifpb.pweb2.aguiamaster.repository.EstudanteRepository;
 @Service
 public class EstudanteService {
     @Autowired
-    private  EstudanteRepository estudanteRepository;
+    EstudanteRepository estudanteRepository;
 
     public Estudante saveEstudate(Estudante novoEstudante){
         

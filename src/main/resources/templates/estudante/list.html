@@ -7,6 +7,7 @@
     <header th:replace="~{/fragments/base :: header}"></header>
   
     <div class="container">
+        <div th:text="${mensagem}" th:if="${mensagem ne null}" class="alert alert-success"></div>
         <h1 class="text-center p-4">lista de estudante</h1>
         <table class="table table-bordered table-hover text-white ">
             <thead>
