@@ -20,8 +20,10 @@ xmlns:th="http://www.thymeleaf.org">
             <tbody>
                 <tr scope="row" th:each="declaracao : ${declaracoes}">
                     <td th:text="${declaracao.id}"></td>
-                    <td th:text="${declaracao.estudante.nome}"></td>
-                    <td th:text="${#dates.format(declaracao.dataRecebimento,'dd/MM/yyyy')}"></td>
+                    <td th:text="${declaracao.estudante.nome}" th:if = "${declaracao.estudante != null}"></td>
+                    <td th:if = "${declaracao.estudante== null}">sem estudante</td>
+
+                    <td th:text="${#dates.format(declaracao.dataRecebimento,'dd/MM/yyyy')}"  ></td>
                     <td th:text="${declaracao.observacao}"></td>
                 </tr>
             </tbody>

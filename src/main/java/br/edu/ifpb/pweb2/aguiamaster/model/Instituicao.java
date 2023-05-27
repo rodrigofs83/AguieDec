@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,13 +38,13 @@ public class Instituicao implements Serializable{
     @NotBlank
     private String fone;
 
-    @OneToMany( mappedBy = "instituicao",
+    @OneToMany( mappedBy = "instituicao",fetch = FetchType.LAZY,
                 targetEntity=Estudante.class,
                 cascade=CascadeType.ALL) //relacionamento
 
     private List<Estudante> estudantes;
 
-    @OneToMany (mappedBy = "instituicao" ,
+    @OneToMany (mappedBy = "instituicao" ,fetch = FetchType.LAZY,
                 targetEntity=PeriodoLetivo.class,
                 cascade=CascadeType.ALL)
    

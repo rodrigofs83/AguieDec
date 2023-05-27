@@ -11,5 +11,4 @@ public class AguiaMasterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AguiaMasterApplication.class, args);
 	}
-
-}                                                                                                                                                                                                                                                      
+}                                                                                                                                                                                                                                           

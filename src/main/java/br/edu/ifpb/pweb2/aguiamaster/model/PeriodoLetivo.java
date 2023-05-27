@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,12 +53,12 @@ public class PeriodoLetivo  implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private  Date fim;
 
-    @OneToMany(mappedBy = "periodoLetivo",
+    @OneToMany(mappedBy = "periodoLetivo",fetch = FetchType.LAZY,
     targetEntity=Declaracao.class,
     cascade=CascadeType.ALL)//relacionamento
     private List<Declaracao> declaracoes;
 
-    @ManyToOne //relacionamento
+    @ManyToOne(fetch = FetchType.LAZY) //relacionamento
     @JoinColumn(name = "instituicao_id")
     private Instituicao instituicao;
     

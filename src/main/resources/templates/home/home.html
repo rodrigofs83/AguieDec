@@ -1,63 +1,35 @@
 <!doctype html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
-
-
-<head th:replace="~{/fragments/base :: head}"><head></head>
-
-<body class="d-flex h-100 text-center text-white bg-dark">
-
+<html lang="en" class="h-100"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/index}"
+>
 
 
 
 
-    <div class="cover-container d-flex w-100 h-100 p-4 mx-auto flex-column">
+<body class=" text-center text-white bg-dark">
 
-        <header class="mb-auto">
-            <!--Navbar-->
-            <nav class="navbar navbar-expand-lg text-white bg-dark  justify-content-center">
-                <div class="row">
-                    <div class="col-md">
-                        <h3 class="float-md-start mb-0">
-                            <img src="imagens/aguia.png" id="img-log" alt="img-log">ÁguiaDec
-                        </h3>
-                    </div>
-                    <div class="col-md-auto">
-                        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navBuguer" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class=" navbar-nav collapse navbar-collapse " id="navBuguer">
-                            <a class="nav-link " aria-current="page" th:href="@{/}">Home</a>
-                            <a class="nav-link" th:href="@{/estudante/form}">Cadastro</a>
-                            <a class="nav-link" href="#">Login</a>
-                        </div>
 
-                    </div>
-                </div>
-            </nav>
-            <!--Navbar-->
-        </header>
+
+
+
+    <div layout:fragment="container">
+
 
 
         <main class="px-3 mb-auto">
             <h1>Sistema de controle de Declarações </h1>
             <p class="lead">Sistema de Controle de recebimento de Declarações de estudantes para Empresas que desejam
-                valida e controla esses recebimentos </p>
+                validar e controlar esses recebimentos </p>
             <p class="lead">
                 <a th:href="@{estudante/form}"
                     class="btn btn-lg btn-secondary fw-bold border-white bg-white">Cadastre-se </a>
             </p>
         </main>
-
-        <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
-
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 
 
 

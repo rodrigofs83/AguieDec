@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,12 +42,12 @@ public class Estudante implements Serializable {
 
     private boolean admin = false;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "instituicao_id")
      @ToString.Exclude
     private Instituicao instituicao;
  
-    @OneToMany(mappedBy = "estudante" ,
+    @OneToMany(mappedBy = "estudante" ,fetch = FetchType.LAZY,
     targetEntity=Declaracao.class,
     cascade=CascadeType.ALL) //relacionamento
     private List<Declaracao> declaracoes;

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,11 +36,11 @@ public class Declaracao implements Serializable {
 
     private String observacao;
 
-    @ManyToOne //relacionamento
+    @ManyToOne(fetch = FetchType.LAZY) //relacionamento
     @JoinColumn(name = "estudante_id")
     private Estudante estudante;
 
-    @ManyToOne//relacionamento
+    @ManyToOne(fetch = FetchType.LAZY)//relacionamento
     @JoinColumn(name = "periodo_id")
     private PeriodoLetivo periodoLetivo;
     

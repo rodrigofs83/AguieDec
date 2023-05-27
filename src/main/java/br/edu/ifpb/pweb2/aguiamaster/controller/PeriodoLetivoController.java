@@ -1,7 +1,6 @@
 package br.edu.ifpb.pweb2.aguiamaster.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +62,7 @@ public class PeriodoLetivoController {
             attrs.addFlashAttribute("mensagem", "periodo editado com sucesso!");
 
         }
+
         periodoLetivoService.savePeriodo(periodo);
         mav.setViewName("redirect:periodo");
         attrs.addFlashAttribute("mensagem", "periodo cadastrado com sucesso!");

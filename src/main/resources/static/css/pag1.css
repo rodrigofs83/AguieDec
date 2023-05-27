@@ -6,6 +6,13 @@
     border-radius: 75px;
     margin-right: 10px;
 }
+body{
+  display: grid;
+  align-content: center;
+  align-content: space-evenly;
+  grid-template-columns: auto;
+  gap: 50px;
+}
 
 /*
  * Header
@@ -48,7 +55,9 @@
   
   }
 .cover-container {
-    max-width: 45em;
+    max-width: 40em;
+    
+
   }
 /*-----*/
 
