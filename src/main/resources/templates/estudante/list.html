@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt_BR" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-
-
-<head th:replace="~{/fragments/base :: head}"></head>
+<!doctype html>
+<html lang="en"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/index}"
+>
 <body class="text-white bg-dark">
-    <header th:replace="~{/fragments/base :: header}"></header>
+    
   
-    <div class="container">
+    <div layout:fragment="container">
         <div th:text="${mensagem}" th:if="${mensagem ne null}" class="alert alert-success"></div>
         <h1 class="text-center p-4">lista de estudante</h1>
         <table class="table table-bordered table-hover text-white ">
@@ -39,7 +40,6 @@
                 </tr>
             </tbody>
         </table>
-        <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
     </div>
 </body>
 

@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt_BR" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!doctype html>
+<html lang="en"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/index}"
+>
+<body>
+            
 
-
-
-<head th:replace="~{/fragments/base :: head}"></head>
-
-    <body class="text-white bg-dark">
-        <header th:replace="~{/fragments/base :: header}"></header>
-            <div class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
-            <main class="main">
-
-                <h1 class="text-center p-4" th:text="${titulo}"></h1>
-
+                <h1 class="text-center p-2" th:text="${titulo}"></h1>
+                <div  layout:fragment="container" class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center" >
                 <form class="form-est" th:action="@{/estudante}" method="POST" th:object="${estudante}">
                     <input type="hidden" th:field="*{id}" />
                     <div class="form-group ">
                         <label for="nome" class="form-label">Nome</label>
-                        <div class="col-md-9">
+                        <div class="col-md-15">
                             <input type="text" th:field="*{nome}" class="form-control" /><br /><br />
                         </div>
                     </div>
@@ -46,12 +43,7 @@
                         <input type="submit" class="btn btn-success" value="Salvar" />
                     </div>
                 </form>
-
-
-            </main>
-
-            <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
-        </div>
+            </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
-xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/base :: head}"></head>
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/index}"
+>
 <body class="text-white bg-dark">
-    <header th:replace="~{/fragments/base :: header}"></header>
-    <div class="container">
+    <div layout:fragment="container" class="container">
     <h1  class="text-center p-4">Periodos</h1>
     <table  class="table table-bordered table-hover text-white ">
         <thead>
             <th scope="col">ID</th>
             <th scope="col">Instituição</th>
-            <th scope="col">periodo</th>
-            <th scope="col">inicio</th>
-            <th scope="col">fim</th>
+            <th scope="col">Periodo</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Fim</th>
             <th scope="col">Ação</th>
 
         </thead>
@@ -20,7 +20,7 @@ xmlns:th="http://www.thymeleaf.org">
             <tr scope="row" th:each="periodo : ${periodos}">
                 <td th:text="${periodo.id}"></td>
                 <td th:text="${periodo.instituicao.nome}"th:if="${periodo.instituicao != null}"></td>
-                <td th:if="${periodo.instituicao==null}">sem instituição</td>
+                <td th:if="${periodo.instituicao==null}">Sem Instituição</td>
                 <td th:text="${periodo.periodo}"></td>
                 <td th:text="${#dates.format(periodo.inicio,'dd/MM/yyyy')}"></td>
                 <td th:text="${#dates.format(periodo.fim,'dd/MM/yyyy')}"></td>
@@ -29,7 +29,7 @@ xmlns:th="http://www.thymeleaf.org">
                         <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
 
                         <a class="btn btn-danger btn-custom" th:href="@{/periodo/excluir/{id}(id=${periodo.id})}">
-                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> excluir</a>
+                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Excluir</a>
                             
                 </td>
             </tr>
@@ -37,6 +37,5 @@ xmlns:th="http://www.thymeleaf.org">
     </table>
    
 </div>
-<footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
 </body>
 </html>

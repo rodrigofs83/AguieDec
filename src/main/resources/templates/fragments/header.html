@@ -1,0 +1,80 @@
+
+<header fragment="header" >
+    <nav class="navbar navbar-expand-lg text-white bg-dark  justify-content-center">
+        <div class="row ">
+            <div class="col-md ">
+                <h3 class="float-md-start mb-0">
+                    <a class="navbar-band" th:href="@{/}">
+                      
+                      <img th:src="@{/imagens/aguia.png}" id="img-log" alt="img-log">
+                    </a>
+            ÁguiaDec
+                    
+                </h3>
+            </div>
+            
+            <div class="col-md " id="menuDropdown">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navBuguer" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class=" navbar-nav collapse navbar-collapse " id="navBuguer">
+                  
+                    <a class="nav-link " aria-current="page" th:href="@{/}">Home</a>
+                  
+                   
+                    <a class="nav-link-dropdown">
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Estudante
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/estudante/form}">Cadastro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/estudante}">Lista</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Declaração</a></li>
+                      </ul>
+                    </div>
+                  </a>
+                  <a class="nav-link-dropdown">
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Instituição
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/instituicao/form}">Cadastro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/instituicao}">Lista</a></li>
+                      </ul>
+                    </div>
+                  </a>
+                  <a class="nav-link-dropdown">
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Periodo
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/periodo/form}">Cadastro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/periodo}">Lista</a></li>
+                      </ul>
+                    </div>
+                  </a>
+                  <a class="nav-link-dropdown">
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Declaração
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Cadastro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/declaracao}">Lista</a></li>
+                      
+                      </ul>
+                    </div>
+                  </a>
+                    <a class="nav-link" href="#">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+

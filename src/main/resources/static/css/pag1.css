@@ -5,6 +5,7 @@
     background-color:#1f1a1a;
     border-radius: 75px;
     margin-right: 10px;
+    
 }
 body{
   display: grid;
@@ -12,36 +13,11 @@ body{
   align-content: space-evenly;
   grid-template-columns: auto;
   gap: 50px;
+  
 }
 
-/*
- * Header
- */
-.navbar-band, a {
-  text-decoration: none;
 
-}
- .navbar-nav .nav-link {
-    padding: .25rem 0;
-    font-weight: 700;
-    color: rgba(255, 255, 255, .5);
-    background-color: transparent;
-    border-bottom: .25rem solid transparent;
-    
-  
-  }
-  .navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
-}
-.navbar-nav .nav-link + .nav-link {
-    margin-left: 1rem;
-  }
-  
-  .navbar-nav .active {
-    color: #fff;
-    border-bottom-color: #fff;
-  }
+
 
   /* Custom default button */
 .btn-secondary,
@@ -56,19 +32,16 @@ body{
   }
 .cover-container {
     max-width: 40em;
+    position: relative;
+    min-height: 30vh;
     
 
   }
+
 /*-----*/
 
 
-  footer{
-    width: 100%;
-    height: 50px;
-    position:absolute;
-    bottom: 0;
-    left: 0;
-    }
+
 
     /*-------- table---------*/
    tr:hover{
