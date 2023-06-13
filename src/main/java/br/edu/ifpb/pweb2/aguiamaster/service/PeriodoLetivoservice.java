@@ -9,23 +9,23 @@ import br.edu.ifpb.pweb2.aguiamaster.model.PeriodoLetivo;
 import br.edu.ifpb.pweb2.aguiamaster.repository.PeriodoLetivoRepository;
 
 @Service
-public class PeriodoLetivoservice {
+public class PeriodoLetivoService {
     @Autowired
     PeriodoLetivoRepository periodoLetivoRepository;
 
     public PeriodoLetivo savePeriodo(PeriodoLetivo novoPeriodoLetivo){
-        
-            PeriodoLetivo periodoLetivo = this.periodoLetivoRepository.save(novoPeriodoLetivo);
-            return periodoLetivo;
+        PeriodoLetivo periodoLetivo = this.periodoLetivoRepository.save(novoPeriodoLetivo);
+            
+        return periodoLetivo;
             
 
     }
 
     public List<PeriodoLetivo> getPeriodoLetivos() {
         return this.periodoLetivoRepository.findAll();
-    } 
+    }
 
-    public PeriodoLetivo getperiodoLetivoById(Integer periodoLetivo_id){
+    public PeriodoLetivo getPeriodoLetivoById(Integer periodoLetivo_id){
             return this.periodoLetivoRepository.findById(periodoLetivo_id).orElse(null);
 
     }
@@ -33,7 +33,12 @@ public class PeriodoLetivoservice {
 	
 
 	public void deletePeriodoLetivoById(Integer periodoLetivo_id) {
-		this.periodoLetivoRepository.deleteById(periodoLetivo_id);
+        PeriodoLetivo p = this.getPeriodoLetivoById(periodoLetivo_id);
+        p.getInstituicao().setPeriodoAtual(null);
+        p.setInstituicao(null);
+        
+        this.periodoLetivoRepository.deleteById(periodoLetivo_id);
+
 
 	}
 

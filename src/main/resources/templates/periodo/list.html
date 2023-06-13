@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout/index}"
+layout:decorate="~{layout/layout}"
 >
 <body class="text-white bg-dark">
     <div layout:fragment="container" class="container">
+    <div th:text="${mensagem}" th:if="${mensagem ne null}" class="alert alert-success"></div>
+
     <h1  class="text-center p-4">Periodos</h1>
+    <form th:action="@{/periodo/form}" method="GET">
+        <button class="btn btn-primary" type="submit">Novo</button>
+    </form><br></br>
     <table  class="table table-bordered table-hover text-white ">
         <thead>
             <th scope="col">ID</th>
             <th scope="col">Instituição</th>
             <th scope="col">Periodo</th>
+            <th scope="col">Ano</th>
             <th scope="col">Inicio</th>
             <th scope="col">Fim</th>
             <th scope="col">Ação</th>
@@ -22,6 +28,7 @@ layout:decorate="~{layout/index}"
                 <td th:text="${periodo.instituicao.nome}"th:if="${periodo.instituicao != null}"></td>
                 <td th:if="${periodo.instituicao==null}">Sem Instituição</td>
                 <td th:text="${periodo.periodo}"></td>
+                <td th:text="${periodo.ano}"></td>
                 <td th:text="${#dates.format(periodo.inicio,'dd/MM/yyyy')}"></td>
                 <td th:text="${#dates.format(periodo.fim,'dd/MM/yyyy')}"></td>
                 <td class="">

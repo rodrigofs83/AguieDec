@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout/index}"
+layout:decorate="~{layout/layout}"
 >
 <body class="text-white bg-dark">
     <div layout:fragment="container" class="container">
+        <div th:text="${mensagem}" th:if="${mensagem ne null}" class="alert alert-success"></div>
+
         <h1  class="text-center p-4">Lista de instituicao</h1>
+        <form th:action="@{/instituicao/form}" method="GET">
+            <button class="btn btn-primary" type="submit">Novo</button>
+        </form><br></br>
         <table  class="table table-bordered table-hover text-white ">
             <thead>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
-                <th scope="col">sigla</th>
-                <th scope="col">fone</th>
+                <th scope="col">Sigla</th>
+                <th scope="col">Fone</th>
+                <th scope="col">Periodo</th>
                 <th scope="col">Ação</th>
 
             </thead>
@@ -21,7 +27,9 @@ layout:decorate="~{layout/index}"
                     <td th:text="${instituicao.nome}"></td>
                     <td th:text="${instituicao.sigla}"></td>
                     <td th:text="${instituicao.fone}"></td>
-                    <td class="">
+                    <td th:text="${instituicao.periodoAtual.Ano}+ '.' + ${instituicao.periodoAtual.periodo.Valor}"th:if="${instituicao.periodoAtual != null}"></td>
+                    <td th:if="${instituicao.periodoAtual == null}"> Sem Periodo </td>
+                    <td >
                     <a class="btn btn-primary btn-custom" th:href="@{/instituicao/edita/{id}(id=${instituicao.id})}">
                         <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
 

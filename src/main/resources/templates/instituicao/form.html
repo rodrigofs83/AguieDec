@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout/index}"
+layout:decorate="~{layout/layout}"
 >
 
 <body class="text-white bg-dark">
@@ -12,12 +12,26 @@ layout:decorate="~{layout/index}"
     <div  layout:fragment="container" class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
         <form th:action="@{/instituicao}" method="POST" th:object="${instituicao}">
             <input type="hidden" th:field="*{id}" />
+            
             <label for="nome" class="form-label">Nome</label>
             <input type="text" th:field="*{nome}" class="form-control" /><br /><br />
+
             <label for="sigla" class="form-label">Sigla</label>
             <input type="text" th:field="*{sigla}" class="form-control" /><br /><br />
+
             <label for="fone" class="form-label">Fone</label>
             <input type="text" th:field="*{fone}" class="form-control" /><br /><br />
+            
+            
+                <div class="p-2 bd-highlight" th:if="${titulo}==Editar">
+                <label for="">Periodo</label>
+                <select  class="form-select" th:field="*{periodoAtual.id}" >
+                    <option  th:each="p : ${periodosCadastrados}"  th:value="${p.id}" th:text="${p.ano+ '.' + p.periodo.getValor()}"
+                        th:selected="${p.id==p.id}"/>
+                </select>
+            
+            </div><br /><br />
+
             <div class="text-center">
                 <input type="submit" class="btn btn-success" value="Salvar" />
             </div>

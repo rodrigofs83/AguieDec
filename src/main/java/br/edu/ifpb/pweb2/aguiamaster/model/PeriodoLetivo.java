@@ -17,10 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo;
 import lombok.AllArgsConstructor;
@@ -38,7 +36,7 @@ public class PeriodoLetivo  implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotNull
+    
     private int ano ;
 
     

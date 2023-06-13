@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -38,16 +39,17 @@ public class Instituicao implements Serializable{
     @NotBlank
     private String fone;
 
+    @OneToOne
+    private PeriodoLetivo  periodoAtual;
+    
     @OneToMany( mappedBy = "instituicao",fetch = FetchType.LAZY,
                 targetEntity=Estudante.class,
-                cascade=CascadeType.ALL) //relacionamento
-
+                cascade={CascadeType.MERGE,CascadeType.PERSIST}) //relacionamento
     private List<Estudante> estudantes;
 
     @OneToMany (mappedBy = "instituicao" ,fetch = FetchType.LAZY,
                 targetEntity=PeriodoLetivo.class,
-                cascade=CascadeType.ALL)
-   
-    private List<PeriodoLetivo> periodos;
+                cascade= {CascadeType.MERGE,CascadeType.PERSIST})
+   private List<PeriodoLetivo> periodos;
     
 }

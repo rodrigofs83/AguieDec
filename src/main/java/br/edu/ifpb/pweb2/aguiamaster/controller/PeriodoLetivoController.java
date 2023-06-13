@@ -1,6 +1,8 @@
 package br.edu.ifpb.pweb2.aguiamaster.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import br.edu.ifpb.pweb2.aguiamaster.model.Instituicao;
 import br.edu.ifpb.pweb2.aguiamaster.model.PeriodoLetivo;
 import br.edu.ifpb.pweb2.aguiamaster.repository.PeriodoLetivoRepository;
 import br.edu.ifpb.pweb2.aguiamaster.service.InstituicaoService;
-import br.edu.ifpb.pweb2.aguiamaster.service.PeriodoLetivoservice;
+import br.edu.ifpb.pweb2.aguiamaster.service.PeriodoLetivoService;
 
 @Controller
 @RequestMapping("/periodo")
@@ -27,7 +29,7 @@ public class PeriodoLetivoController {
     PeriodoLetivoRepository periodoLetivoRepository;
 
     @Autowired
-    PeriodoLetivoservice periodoLetivoService;
+    PeriodoLetivoService periodoLetivoService;
 
     @Autowired
     InstituicaoService instituicaoService;
@@ -46,6 +48,15 @@ public class PeriodoLetivoController {
         return instituicaoService.getInstituicao();
     }
 
+    @ModelAttribute("hoje")
+    public int getDataAtual(){
+        LocalDate data = LocalDate.now();
+        int hoje = data.getYear();
+        
+        return hoje;
+    }
+    
+
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView save(@Valid PeriodoLetivo periodo,
             ModelAndView mav, BindingResult validation, RedirectAttributes attrs) {
@@ -53,6 +64,7 @@ public class PeriodoLetivoController {
             mav.setViewName("periodo/form");
             return mav;
         }
+        
         if (periodo.getId() == null) {
             attrs.addFlashAttribute("mensagem", "periodo cadastrado com sucesso!");
             // mav.addObject("titulo","Cadastra");
@@ -62,10 +74,14 @@ public class PeriodoLetivoController {
             attrs.addFlashAttribute("mensagem", "periodo editado com sucesso!");
 
         }
+        Instituicao instituicao = null;
+        if(periodo.getInstituicao() != null){
+            instituicao = instituicaoService.getInstituicaoById(periodo.getInstituicao().getId());
+            instituicao.setPeriodoAtual(periodo);
+        }
 
         periodoLetivoService.savePeriodo(periodo);
         mav.setViewName("redirect:periodo");
-        attrs.addFlashAttribute("mensagem", "periodo cadastrado com sucesso!");
         return mav;
     }
 
@@ -75,6 +91,8 @@ public class PeriodoLetivoController {
         mav.addObject("periodos", periodoLetivoService.getPeriodoLetivos());
         return mav;
     }
+
+
 
     @RequestMapping("/excluir/{id}")
     public ModelAndView deletePeriodoById(@PathVariable(value = "id") Integer id, ModelAndView mav,
@@ -89,7 +107,7 @@ public class PeriodoLetivoController {
     @RequestMapping("/edita/{id}")
     public ModelAndView editaPeriodoLetivoById(@PathVariable(value = "id") Integer id, ModelAndView mav,
             RedirectAttributes attr) {
-        PeriodoLetivo peLetivo = periodoLetivoService.getperiodoLetivoById(id);
+        PeriodoLetivo peLetivo = periodoLetivoService.getPeriodoLetivoById(id);
         mav.addObject("periodo", peLetivo);
         mav.addObject("titulo", "Editar");
         mav.setViewName("periodo/form");

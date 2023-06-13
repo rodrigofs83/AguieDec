@@ -16,9 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.aguiamaster.model.Instituicao;
-
+import br.edu.ifpb.pweb2.aguiamaster.model.PeriodoLetivo;
 import br.edu.ifpb.pweb2.aguiamaster.repository.InstituicaoRepository;
 import br.edu.ifpb.pweb2.aguiamaster.service.InstituicaoService;
+import br.edu.ifpb.pweb2.aguiamaster.service.PeriodoLetivoService;
 
 @Controller
 @RequestMapping("/instituicao")
@@ -30,6 +31,8 @@ public class InstituicaoController {
     @Autowired
     InstituicaoService instituicaoService;
 
+    @Autowired
+    PeriodoLetivoService periodoLetivoService;
     @RequestMapping("/form")
     public ModelAndView getCasdastroInstituicao(Instituicao instituicao, ModelAndView mav) {
         mav.addObject("titulo", "Cadastro de Instituição");
@@ -41,6 +44,11 @@ public class InstituicaoController {
     @ModelAttribute("instituicaoItens")
     public List<Instituicao> getInstituicaos() {
         return instituicaoService.getInstituicao();
+    }
+
+    @ModelAttribute("periodosCadastrados")
+    public List<PeriodoLetivo> getPeriodos() {
+        return periodoLetivoService.getPeriodoLetivos();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -61,7 +69,6 @@ public class InstituicaoController {
         }
         instituicaoService.saveInstituicao(instituicao);
         mav.setViewName("redirect:instituicao");
-        attrs.addFlashAttribute("mensagem", "Instituição cadastrado com sucesso!");
         return mav;
     }
 
@@ -81,7 +88,7 @@ public class InstituicaoController {
             mav.addObject("instituicao", instituicao);
             mav.setViewName("instituicao/form");
         } else {
-            mav.addObject("mesagem", "instituicao com id=" + id + " não encontrado!");
+            mav.addObject("mensagem", "instituicao com id=" + id + " não encontrado!");
             mav.setViewName("instituicao");
 
         }
@@ -89,11 +96,10 @@ public class InstituicaoController {
     }
 
     @RequestMapping("/excluir/{id}")
-    public ModelAndView deleteInstituicaoById(@PathVariable(value = "id") Integer id, ModelAndView mav,
-            RedirectAttributes attr) {
+    public ModelAndView deleteInstituicaoById(@PathVariable("id") Integer id, ModelAndView mav,RedirectAttributes attr) {
 
         instituicaoService.deleteInstituicaoById(id);
-        attr.addFlashAttribute("messagem", "instrituição removida com susseso!");
+        attr.addFlashAttribute("mensagem", "instrituição removida com susseso!");
         mav.setViewName("redirect:/instituicao");
         return mav;
 

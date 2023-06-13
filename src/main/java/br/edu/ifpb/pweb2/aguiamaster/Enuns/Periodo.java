@@ -1,14 +1,14 @@
 package br.edu.ifpb.pweb2.aguiamaster.Enuns;
 
 public enum Periodo {
-    PRIMEIRO("Primeiro"),
-    SEGUNDO("Segundo"),
-    TERCEIRO("Terceiro"),
-    QUARTO("Quarto");
+    PRIMEIRO("1"),
+    SEGUNDO("2");
 
-    private String periodo;
-
+    private  final String periodo;
     private Periodo(String periodo){
-        this.periodo = periodo;
+        this.periodo =  periodo;
+    }
+    public String getValor(){
+        return this.periodo;
     }
 }

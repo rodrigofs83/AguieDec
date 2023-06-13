@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout/index}"
+layout:decorate="~{layout/layout}"
 >
 <body class="text-white bg-dark">
 
@@ -9,25 +9,24 @@ layout:decorate="~{layout/index}"
     <div layout:fragment="container" class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
         <form th:action="@{/periodo}" method="POST" th:object="${periodo}">
             <input type="hidden" th:field="*{id}" />
-            <div class="d-flex flex-row bd-highlight ">
-                
-                    <label for="instituicao" class="form-label">Instituição</label>
-                    <select id="instituicao.id" th:field="*{instituicao.id}" class="form-select">
-                        <option th:each="ins : ${instituicaoItens}" th:value="${ins.id}" th:text="${ins.nome}"
-                            th:selected="${ins.id==instituicao}" />
-                    </select>
-          
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <label for="periodo" class="form-label">Periodo</label>
-                <select th:field="*{periodo}">
-                    <option th:each="p : ${T( br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo).values()}" th:value="${p}"
-                        th:text="${p}"></option>
-                </select>
-            </div>
-
            
+             <div >
+                <label for="instituicao">Instituição</label>
+                <select id="instituicao.id" th:field="*{instituicao.id}" class="form-select">
+                    <option th:each="ins : ${instituicaoItens}" th:value="${ins.id}" th:text="${ins.nome}"
+                        th:selected="${ins.id==instituicao}"/>
+                </select>
+            </div><br /><br /> 
+            
+            <label for="ano" class="form-label">Ano</label>
+            <input  th:field="*{ano}" class="form-control" placeholder="" type="number" step="1"   th:attr = "min=${hoje}"/><br /><br />
+            
+            <label for="periodo" class="form-label">Periodo</label>s
+                <select th:field="*{periodo}"  class="form-select">
+                    <option th:each="p : ${T( br.edu.ifpb.pweb2.aguiamaster.Enuns.Periodo).values()}" th:value="${p}"
+                      th:text="${p}"></option>
+                </select><br /><br />
+
             <label for="inicio" class="form-label">Inicio</label>
             <input type="date" th:field="*{inicio}" class="form-control" pattern="dd/MM/yyyy" /><br /><br />
             <label for="fim" class="form-label">Fim</label>
@@ -38,8 +37,7 @@ layout:decorate="~{layout/index}"
 
         </form>
 
-    </div>
-    <div>
+
     </div>
 </body>
 

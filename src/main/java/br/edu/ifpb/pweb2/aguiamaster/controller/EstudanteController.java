@@ -34,7 +34,7 @@ public class EstudanteController {
     public ModelAndView getCasdastroEstudante(Estudante estudante, ModelAndView mav) {
         mav.addObject("estudante", estudante);
         mav.setViewName("estudante/form");
-        mav.addObject("titulo", "Cadastra");
+        mav.addObject("titulo", "Cadastro  de Estudante ");
         return mav;
     }
 

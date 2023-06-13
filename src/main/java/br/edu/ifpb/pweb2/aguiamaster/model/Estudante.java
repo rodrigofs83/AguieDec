@@ -43,8 +43,8 @@ public class Estudante implements Serializable {
     private boolean admin = false;
     
     @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "instituicao_id")
-     @ToString.Exclude
+    @JoinColumn(name = "instituicao_id")
+    @ToString.Exclude
     private Instituicao instituicao;
  
     @OneToMany(mappedBy = "estudante" ,fetch = FetchType.LAZY,
