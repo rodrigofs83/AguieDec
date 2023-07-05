@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +34,8 @@ public class InstituicaoController {
 
     @Autowired
     PeriodoLetivoService periodoLetivoService;
+
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/form")
     public ModelAndView getCasdastroInstituicao(Instituicao instituicao, ModelAndView mav) {
         mav.addObject("titulo", "Cadastro de Instituição");
@@ -52,8 +55,8 @@ public class InstituicaoController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(@Valid Instituicao instituicao,
-            ModelAndView mav, BindingResult validation, RedirectAttributes attrs) {
+    public ModelAndView save(@Valid Instituicao instituicao,BindingResult validation,
+            ModelAndView mav, RedirectAttributes attrs) {
         if (validation.hasErrors()) {
             mav.setViewName("Instituicao/form");
             return mav;
@@ -95,6 +98,7 @@ public class InstituicaoController {
         return mav;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/excluir/{id}")
     public ModelAndView deleteInstituicaoById(@PathVariable("id") Integer id, ModelAndView mav,RedirectAttributes attr) {
 
@@ -105,6 +109,7 @@ public class InstituicaoController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/edita/{id}")
     public ModelAndView editaInstituicaoById(@PathVariable(value = "id") Integer id, ModelAndView mav,
             RedirectAttributes attr) {

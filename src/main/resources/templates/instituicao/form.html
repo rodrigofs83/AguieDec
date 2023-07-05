@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="en"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -14,13 +14,19 @@ layout:decorate="~{layout/layout}"
             <input type="hidden" th:field="*{id}" />
             
             <label for="nome" class="form-label">Nome</label>
+            <p  class =" text-err " th:if =" ${#fields.hasErrors('nome')} " th:errorclass =" error " th:errors =" *{nome} " > </p>
+
             <input type="text" th:field="*{nome}" class="form-control" /><br /><br />
 
             <label for="sigla" class="form-label">Sigla</label>
+            <p  class =" text-err " th:if =" ${#fields.hasErrors('sigla')} " th:errorclass =" error " th:errors =" *{sigla} " > </p>
+
             <input type="text" th:field="*{sigla}" class="form-control" /><br /><br />
 
-            <label for="fone" class="form-label">Fone</label>
-            <input type="text" th:field="*{fone}" class="form-control" /><br /><br />
+            <label for="fone" class="form-label">DD+ Fone </label>
+            <p  class =" text-err " th:if =" ${#fields.hasErrors('fone')} " th:errorclass =" error " th:errors =" *{fone}" > </p>
+
+            <input type="text" th:field="*{fone}" class="form-control "placeholder="Ex.: 99 99999-9999" /><br /><br />
             
             
                 <div class="p-2 bd-highlight" th:if="${titulo}==Editar">

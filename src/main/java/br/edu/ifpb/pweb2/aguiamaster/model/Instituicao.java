@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,13 +31,14 @@ public class Instituicao implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message="Campo obrigatório!")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message="Campo obrigatório!")
     private String sigla;
 
-    @NotBlank
+    
+    @Pattern(regexp = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$",message ="numero invalido")
     private String fone;
 
     @OneToOne

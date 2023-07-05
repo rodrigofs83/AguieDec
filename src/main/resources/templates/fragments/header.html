@@ -21,7 +21,7 @@
                 </button>
                 <div class=" navbar-nav collapse navbar-collapse " id="navBuguer">
                   
-                    <a class="nav-link " aria-current="page" th:href="@{/}">Home</a>
+                    <a th:classappend="${menu == 'home'} ? 'active'" class="nav-link " aria-current="page" th:href="@{/}">Home</a>
                   
                    
                     <a class="nav-link-dropdown">
@@ -32,8 +32,8 @@
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" th:href="@{/estudante/form}">Cadastro</a></li>
                         <li><a class="dropdown-item" th:href="@{/estudante}">Lista</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Declaração</a></li>
+                        <!-- <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="@{/declaracao}">Declaração</a></li> -->
                       </ul>
                     </div>
                   </a>
@@ -43,7 +43,7 @@
                         Instituição
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:href="@{/instituicao/form}">Cadastro</a></li>
+                        <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:classappend="${menu == 'instituicao'} ? 'active'"  th:href="@{/instituicao/form}">Cadastro</a></li>
                         <li><a class="dropdown-item" th:href="@{/instituicao}">Lista</a></li>
                       </ul>
                     </div>
@@ -65,13 +65,14 @@
                         Declaração
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Cadastro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/declaracao/form}">Cadastro</a></li>
                         <li><a class="dropdown-item" th:href="@{/declaracao}">Lista</a></li>
                       
                       </ul>
                     </div>
                   </a>
                     <a class="nav-link" href="#">Login</a>
+                    
                 </div>
             </div>
         </div>

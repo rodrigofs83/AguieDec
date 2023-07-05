@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,8 +59,8 @@ public class PeriodoLetivoController {
     
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(@Valid PeriodoLetivo periodo,
-            ModelAndView mav, BindingResult validation, RedirectAttributes attrs) {
+    public ModelAndView save(@Valid PeriodoLetivo periodo, BindingResult validation,
+            ModelAndView mav, RedirectAttributes attrs) {
         if (validation.hasErrors()) {
             mav.setViewName("periodo/form");
             return mav;
@@ -93,7 +94,7 @@ public class PeriodoLetivoController {
     }
 
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/excluir/{id}")
     public ModelAndView deletePeriodoById(@PathVariable(value = "id") Integer id, ModelAndView mav,
             RedirectAttributes attr) {
@@ -103,7 +104,7 @@ public class PeriodoLetivoController {
         return mav;
 
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/edita/{id}")
     public ModelAndView editaPeriodoLetivoById(@PathVariable(value = "id") Integer id, ModelAndView mav,
             RedirectAttributes attr) {

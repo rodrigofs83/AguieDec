@@ -31,12 +31,19 @@ layout:decorate="~{layout/layout}"
                     <td th:text="${estudante.matricula}"></td>
                     <td th:text="${estudante.instituicao.nome}" th:if="${estudante.instituicao != null}"></td>
                     <td th:if="${estudante.instituicao == null}">Sem institução cadastrada</td>
-                    <td class="">
+                    <td>
                         <a class="btn btn-primary btn-custom" th:href="@{/estudante/edita/{id}(id=${estudante.id})}">
-                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
+                            <span><i class="bi bi-pencil-square"></i></span>
+                        </a>
 
-                            <a class="btn btn-danger btn-custom" th:href="@{/estudante/excluir/{id}(id=${estudante.id})}">
-                                <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> excluir</a>
+                        <a class="btn btn-danger btn-custom" th:href="@{/estudante/excluir/{id}(id=${estudante.id})}">
+                            <span><i class="bi bi-trash"></i></span>
+                        </a>
+                                
+                        <a class="btn btn-primary btn-custom" th:href="@{/estudante/enviar/{id}(id=${estudante.id})}">
+                            <span> <i class="bi bi-journal-text"></span></i>
+                        </a>
+                    </td>
                                 
                     </td>
 

@@ -7,7 +7,7 @@ layout:decorate="~{layout/layout}"
     <div layout:fragment="container" class="container">
         <div th:text="${mensagem}" th:if="${mensagem ne null}" class="alert alert-success"></div>
 
-        <h1  class="text-center p-4">Lista de instituicao</h1>
+        <h1  class="text-center p-4">Lista de Instituições</h1>
         <form th:action="@{/instituicao/form}" method="GET">
             <button class="btn btn-primary" type="submit">Novo</button>
         </form><br></br>
@@ -31,11 +31,10 @@ layout:decorate="~{layout/layout}"
                     <td th:if="${instituicao.periodoAtual == null}"> Sem Periodo </td>
                     <td >
                     <a class="btn btn-primary btn-custom" th:href="@{/instituicao/edita/{id}(id=${instituicao.id})}">
-                        <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
+                        <span><i class="bi bi-pencil-square"></i></span></a>
 
                         <a class="btn btn-danger btn-custom" th:href="@{/instituicao/excluir/{id}(id=${instituicao.id})}">
-                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> excluir</a>
-                            
+                            <span><i class="bi bi-trash"></i></span>
                     </td>
                 </tr>
             </tbody>

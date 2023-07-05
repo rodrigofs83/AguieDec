@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/layout}"
+>
+<body class="text-white bg-dark">
+
+    <h1 class="text-center p-4" th:text="${titulo}"></h1>
+    <div  layout:fragment="container" class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
+
+        <form th:action="@{/auth}" method="POST">
+            <div class="centered form-signin">
+                <div class="logo-bar mb-4">
+                    <img class="" th:src="@{/imagens/aguia.png}" id="img-login" alt="Logo">
+
+                   
+                        
+                </div>
+                <h1 class="h3 mb-3 font-weight-normal autentique color-white">Por favor, autentique-se</h1>
+                <!-- <div th:if="${not #strings.isEmpty(mensagem)}"
+                    th:utext="${mensagem} +'<button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;><span aria-hidden=&quot;true&quot;>&times;</span></button>'"
+                    class="alert alert-danger alert-dismissible fade show" role="alert">
+                </div> -->
+                <label for="email" class="sr-only autentique color-white">Email</label>
+                <input type="text" class="form-control input-login" placeholder="Username" required autofocus name="username">
+
+                <label for="senha" class="sr-only autentique color-white">Senha</label>
+                <input type="password" class="form-control input-login" placeholder="Senha" required name="password">
+                <!-- <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="lembrar">Lembrar-me
+                    </label>
+                </div> --></br>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-success" value="Entar" />
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+
+    </html>

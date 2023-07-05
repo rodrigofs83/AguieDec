@@ -31,13 +31,13 @@ layout:decorate="~{layout/layout}"
                 <td th:text="${periodo.ano}"></td>
                 <td th:text="${#dates.format(periodo.inicio,'dd/MM/yyyy')}"></td>
                 <td th:text="${#dates.format(periodo.fim,'dd/MM/yyyy')}"></td>
-                <td class="">
+                <td>
                     <a class="btn btn-primary btn-custom" th:href="@{/periodo/edita/{id}(id=${periodo.id})}">
-                        <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Editar</a>
-
-                        <a class="btn btn-danger btn-custom" th:href="@{/periodo/excluir/{id}(id=${periodo.id})}">
-                            <span class="glyphicon glyphicon-ok img-circle text-primary btn-icon"></span> Excluir</a>
-                            
+                        <span><i class="bi bi-pencil-square"></i></span>
+                    </a>
+                    <a class="btn btn-danger btn-custom" th:href="@{/periodo/excluir/{id}(id=${periodo.id})}">
+                            <span><i class="bi bi-trash"></i></span>
+                    </a>
                 </td>
             </tr>
         </tbody>

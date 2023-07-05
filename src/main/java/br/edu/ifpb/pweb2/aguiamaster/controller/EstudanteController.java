@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.ifpb.pweb2.aguiamaster.model.Declaracao;
 import br.edu.ifpb.pweb2.aguiamaster.model.Estudante;
 import br.edu.ifpb.pweb2.aguiamaster.model.Instituicao;
+import br.edu.ifpb.pweb2.aguiamaster.model.User;
+import br.edu.ifpb.pweb2.aguiamaster.repository.UserRepository;
 import br.edu.ifpb.pweb2.aguiamaster.service.EstudanteService;
 import br.edu.ifpb.pweb2.aguiamaster.service.InstituicaoService;
 
@@ -30,6 +34,11 @@ public class EstudanteController {
     @Autowired
     InstituicaoService instituicaoService;
 
+    @Autowired
+    UserRepository userRepository;
+
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
     @RequestMapping("/form")
     public ModelAndView getCasdastroEstudante(Estudante estudante, ModelAndView mav) {
         mav.addObject("estudante", estudante);
@@ -38,15 +47,20 @@ public class EstudanteController {
         return mav;
     }
 
+    @ModelAttribute("users")
+    public List<User> getUsersOptions(){
+        return userRepository.findByEnabledTrue();
+    }
     @ModelAttribute("instituicaoItens")
     public List<Instituicao> getInstituicaos() {
         return instituicaoService.getInstituicao();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(@Valid Estudante estudante,
-            ModelAndView mav, BindingResult validation, RedirectAttributes attrs) {
+    public ModelAndView save(@Valid Estudante estudante,BindingResult validation,
+            ModelAndView mav, RedirectAttributes attrs) {
         if (validation.hasErrors()) {
+            mav.addObject("message", "Erros de validação! Corrija-os e tente novamente.");
             mav.setViewName("estudante/form");
             return mav;
         }
@@ -64,7 +78,7 @@ public class EstudanteController {
         return mav;
 
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView listAll(ModelAndView mav) {
         mav.setViewName("estudante/list");
@@ -113,5 +127,16 @@ public class EstudanteController {
         mav.setViewName("estudante/form");
         return mav;
     }
-
+    @RequestMapping("/enviar/{id}")
+    public ModelAndView enviaDeclaracao(@PathVariable("id") Integer id, ModelAndView mav) {
+            Estudante estudante = estudanteService.getEstudanteById(id);
+                Declaracao declaracao = new Declaracao();
+                mav.addObject("estudante", estudante);
+                mav.addObject("declaracao", declaracao);
+                mav.setViewName("declaracao/form");
+            
+    
+            
+            return mav;
+    }
 }

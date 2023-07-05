@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.aguiamaster.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,15 +44,24 @@ public class InstituicaoService {
 
     public void deleteInstituicaoById(Integer instituicao_id) {
         Instituicao ins = this.getInstituicaoById(instituicao_id);
+        
         for(PeriodoLetivo pl : periodoLetivoService.getPeriodoLetivos()){
-            if(pl.getInstituicao().getId() == instituicao_id){
+
+            Optional<Instituicao> pInst = Optional.ofNullable(pl.getInstituicao());
+            if(pInst.isPresent()){
+                if(ins.getId() == pl.getInstituicao().getId() ){
                 pl.setInstituicao(null);
-                
+                }
             }
         }
         for(Estudante es : estudanteService.getEstudantes()){
-                if(es.getInstituicao().getId() == instituicao_id){
-                es.setInstituicao(null);
+            
+            Optional<Instituicao> pInst = Optional.ofNullable(es.getInstituicao());
+            if(pInst.isPresent()){
+                if(ins.getId() == es.getInstituicao().getId()){
+                    es.setInstituicao(null);
+                }
+                
                 
             }
         }
@@ -59,5 +69,7 @@ public class InstituicaoService {
     }
 
     
-    
+     public List<PeriodoLetivo> getPeriodoInstituicaoById(Instituicao instituicao ){
+        return this.instituicaoRepository.findPeriodosByInstituicao(instituicao);
+    }    
 }

@@ -1,18 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en"
-xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{fragments/base :: head}"></head>
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/layout}"
+>
 <body class="text-white bg-dark">
-    <header th:replace="~{fragments/base :: header}"></header>
-    <div class="cover-container w-100 h-100  mx-auto flex-column d-flex align-items-center">
-        <h1 class="text-center p-4">lista de declaração</h1>
+
+    <div layout:fragment="container" class="container">
+        <h1 class="text-center p-4">Lista de Declaração</h1>
+
+        <form th:action="@{/declaracao/form}" method="GET">
+            <button class="btn btn-primary" type="submit">Novo</button>
+        </form><br></br>
+
         <table class="table table-bordered table-hover text-white ">
             <thead>
 
                 <th scope="col">ID</th>
                 <th scope="col">Estudante</th>
-                <th scope="col">Data de envior</th>
-                <th scope="col">Obs</th>
+                <th scope="col">Data de Envior</th>
+                <th scope="col">Data de Vencimento</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Download</th>
+                <th scope="col">Ação</th>
 
 
             </thead>
@@ -22,14 +32,30 @@ xmlns:th="http://www.thymeleaf.org">
                     <td th:text="${declaracao.id}"></td>
                     <td th:text="${declaracao.estudante.nome}" th:if = "${declaracao.estudante != null}"></td>
                     <td th:if = "${declaracao.estudante== null}">sem estudante</td>
-
                     <td th:text="${#dates.format(declaracao.dataRecebimento,'dd/MM/yyyy')}"  ></td>
-                    <td th:text="${declaracao.observacao}"></td>
+                    <td th:text="${#dates.format(declaracao.dataVencimento,'dd/MM/yyyy')}"  ></td>
+                    <td th:if="${declaracao.documento != null}" th:text = "${declaracao.documento.nome}"></td>
+                    <td th:if="${declaracao.documento != null}">
+                        <a th:href="@{/declaracao/{id}/documentos(id=${declaracao.id})}" title="Download">
+                            <i class="bi bi-download" aria-hidden="true"></i>
+                    </td>
+
+                    <td th:if="${declaracao.documento == null}">Nenhum documento encontrado!</td>
+                    <td th:if="${declaracao.documento == null}">Nenhum documento para download!</td>
+                    <td>
+                        <a class="btn btn-primary btn-custom" th:href="@{/declaracao/edita/{id}(id=${declaracao.id})}">
+                            <span><i class="bi bi-pencil-square"></i></span></a>
+
+                            <a class="btn btn-danger btn-custom" th:href="@{/declaracao/excluir/{id}(id=${declaracao.id})}">
+                                <span><i class="bi bi-trash"></i></span>
+                            </a>
+                            <a class="btn btn-primary btn-custom" th:href="@{/declaracao/{id}/documentos/upload(id=${declaracao.id})}">
+                                <span> <i class="bi bi-journal-text"></span></i>
+                            </a>
+                    </td>
                 </tr>
             </tbody>
-    </div>
-    <div>
-        <footer class="text-center" th:insert="~{/fragments/base :: footer}"></footer>
+        </table>
     </div>
 </body>
 </html>
