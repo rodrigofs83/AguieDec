@@ -11,7 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.edu.ifpb.pweb2.aguiamaster.model.User;
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -43,8 +44,8 @@ public class AguiDecSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(encoder)
-        .withUser(User.builder().username("ro").password(encoder.encode("123")).roles("ADMIN").build())
-        .withUser(User.builder().username("lu").password(encoder.encode("456")).roles("ALUNO").build());
+                .passwordEncoder(encoder);
+        // .withUser(User.builder().username("ro").password(encoder.encode("123")).roles("ADMIN").build());
+         // .withUser(User.builder().username("lu").password(encoder.encode("456")).roles("ALUNO").build());
     }
 }

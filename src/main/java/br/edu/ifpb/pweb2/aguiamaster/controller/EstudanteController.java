@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifpb.pweb2.aguiamaster.model.Declaracao;
 import br.edu.ifpb.pweb2.aguiamaster.model.Estudante;
 import br.edu.ifpb.pweb2.aguiamaster.model.Instituicao;
-import br.edu.ifpb.pweb2.aguiamaster.model.User;
+import br.edu.ifpb.pweb2.aguiamaster.model.Usuario;
 import br.edu.ifpb.pweb2.aguiamaster.repository.UserRepository;
 import br.edu.ifpb.pweb2.aguiamaster.service.EstudanteService;
 import br.edu.ifpb.pweb2.aguiamaster.service.InstituicaoService;
@@ -48,7 +48,7 @@ public class EstudanteController {
     }
 
     @ModelAttribute("users")
-    public List<User> getUsersOptions(){
+    public List<Usuario> getUsersOptions(){
         return userRepository.findByEnabledTrue();
     }
     @ModelAttribute("instituicaoItens")

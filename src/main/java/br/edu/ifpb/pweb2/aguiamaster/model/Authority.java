@@ -25,7 +25,7 @@ public class Authority {
     
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
-    private User username;
+    private Usuario username;
 
     @Column(name = "authority", insertable = false, updatable = false)
     private String authority;
